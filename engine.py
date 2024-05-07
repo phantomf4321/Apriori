@@ -4,6 +4,7 @@ import pandas as pd
 from scipy.spatial import distance
 import time
 from apriori import GROUP
+import math
 
 class Engine:
     def __init__(self, group):
@@ -17,6 +18,19 @@ class Engine:
         end = time.time()
         print("your function is spending {}s".format(end - start))
 
+
+    def mae(self, y_true, predictions):
+        y_true, predictions = np.array(y_true), np.array(predictions)
+        return np.mean(np.abs(y_true - predictions))
+
+    def gsm(self):
+        """
+        Agha man digeh rad dadam...
+        """
+
+
+
+
     def get_group(self):
         return self.group
 
@@ -29,16 +43,16 @@ class Engine:
         Trust_matrix = pd.DataFrame(0.0, index=members, columns=members)
 
         for u in members:
-            rated_list_u = self.group.loc[u].index[self.group.loc[u] > 0]
+            rated_list_u = self.group.loc[u].index[Group.loc[u] > 0]
             count_rated_u = len(rated_list_u)
-            ratings_u = self.group.loc[u][:]
+            ratings_u = Group.loc[u][:]
 
             for v in members:
                 if u == v:
                     continue
 
-                rated_list_v = self.group.loc[v].index[self.group.loc[v] > 0]
-                ratings_v = self.group.loc[v][:]
+                rated_list_v = Group.loc[v].index[Group.loc[v] > 0]
+                ratings_v = Group.loc[v][:]
 
                 intersection_uv = set(rated_list_u).intersection(rated_list_v)
                 count_intersection = len(intersection_uv)
@@ -158,6 +172,8 @@ class Engine:
 
     def evaluate_recommendations(self, Group_Rating, rec_size, satisfied_Tr):
 
+        predict_list = []
+
         Group_Rating = Group_Rating.sort_values(ascending=False)
         rec_list = Group_Rating[Group_Rating != 0]
 
@@ -170,19 +186,23 @@ class Engine:
 
         for r, index in enumerate(recommendation_index):
             for u in members:
-                preference_u_ind = self.group.at[u, index]
+                preference_u_ind = Group.at[u, index]
 
                 if r < rec_size:
                     if preference_u_ind >= satisfied_Tr:
                         satisfied += 1
                         TP += 1
+                        predict_list.append(1)
                     else:
                         FP += 1
+                        predict_list.append(0)
                 else:
                     if preference_u_ind >= satisfied_Tr:
                         FN += 1
+                        predict_list.append(0)
                     else:
                         TN += 1
+                        predict_list.append(1)
 
         total_count = TP + FP + TN + FN
 
@@ -193,11 +213,24 @@ class Engine:
         f1_score = (2 * precision * recall) / (precision + recall) if precision + recall > 0 else 0
         balanced_accuracy = (specificity + recall) / 2
 
+        true_list = np.ones(len(predict_list))
+        predict_list = np.array(predict_list)
+
+        MAE = self.mae(true_list, predict_list)
+
+        MSE = np.square(np.subtract(true_list, predict_list)).mean()
+        RMSE = math.sqrt(MSE)
+
+        GMS = self.gsm()
+
         results = {
             "Accuracy": accuracy,
             "Precision": precision,
             "Recall": recall,
             "Balanced_Accuracy": balanced_accuracy,
+            "MAE": MAE,
+            "RMSE": RMSE,
+            "GMS": GMS,
             "Confusion_counters": {"TP": TP, "FP": FP, "TN": TN, "FN": FN}
         }
 
@@ -218,6 +251,10 @@ class Engine:
 
         print("Evaluation Results:", Evaluation_Results)
 
+        # Save the evaluation results to an Excel file
+        results_df = pd.DataFrame(Evaluation_Results, index=["Evaluation Results"])
+        results_df.to_excel('Results/Evaluation_Results.xlsx')
+
 
     def run_val(self, centrality):
 
@@ -233,4 +270,3 @@ class Engine:
         Evaluation_Results = self.evaluate_recommendations(Group_Rating, rec_size, satisfied_Tr)
 
         return Evaluation_Results
-

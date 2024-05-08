@@ -130,3 +130,35 @@ class GROUP:
         df.insert(0, "Unnamed: 0", group_elements, True)
         df.set_index("Unnamed: 0", inplace = True)
         return df
+
+
+    def set_sub_matrix(self, number_of_movies):
+
+        group_elements = self.group_elements()
+        sub_list1 = self.data_frame['item_id'][0:number_of_movies].values.tolist()
+        list_of_cul = sub_list1
+
+
+        list_of_cul.sort()
+        list_of_cul = list(OrderedDict.fromkeys(list_of_cul))
+
+        cur_matrix = []
+        for ge in group_elements:
+            curr_data = self.data_frame.loc[self.data_frame['user_id'] == ge]
+
+            cur_row = []
+            for loc in list_of_cul:
+                cur_list = curr_data['item_id'].values.tolist()
+                if loc in cur_list:
+                    curr_rate = self.data_frame.loc[self.data_frame['user_id'] == ge]
+                    curr_rate2 = curr_rate.loc[self.data_frame['item_id'] == loc]
+                    rate_list = curr_rate2['rating_value'].values.tolist()
+                    cur_row.append(rate_list[0])
+                else:
+                    cur_row.append(0)
+            cur_matrix.append(cur_row)
+
+        df = pd.DataFrame(cur_matrix, columns=list_of_cul)
+        df.insert(0, "Unnamed: 0", group_elements, True)
+        df.set_index("Unnamed: 0", inplace = True)
+        return df

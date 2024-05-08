@@ -42,7 +42,7 @@ class Engine:
         Trust_matrix = pd.DataFrame(0.0, index=members, columns=members)
 
         for u in members:
-            rated_list_u = self.group.loc[u].index[Group.loc[u] > 0]
+            rated_list_u = self.group.loc[u].index[Group.loc[u] >= 0]
             count_rated_u = len(rated_list_u)
             ratings_u = Group.loc[u][:]
 

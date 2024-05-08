@@ -3,7 +3,6 @@ import numpy as np
 import pandas as pd
 from scipy.spatial import distance
 import time
-from apriori import GROUP
 import math
 
 class Engine:
@@ -39,7 +38,7 @@ class Engine:
 
     def calculate_trust(self):
         members = self.group.index
-
+        Group = self.get_group()
         Trust_matrix = pd.DataFrame(0.0, index=members, columns=members)
 
         for u in members:
@@ -173,7 +172,7 @@ class Engine:
     def evaluate_recommendations(self, Group_Rating, rec_size, satisfied_Tr):
 
         predict_list = []
-
+        Group = self.get_group()
         Group_Rating = Group_Rating.sort_values(ascending=False)
         rec_list = Group_Rating[Group_Rating != 0]
 
@@ -253,7 +252,7 @@ class Engine:
 
         # Save the evaluation results to an Excel file
         results_df = pd.DataFrame(Evaluation_Results, index=["Evaluation Results"])
-        results_df.to_excel('Results/Evaluation_Results.xlsx')
+        #results_df.to_excel('Results/Evaluation_Results.xlsx')
 
 
     def run_val(self, centrality):

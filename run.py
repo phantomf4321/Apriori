@@ -10,15 +10,9 @@ G1 = GROUP('dataset/raiting.csv', 5)
 Group = G1.set_matrix()
 print(Group)
 
-
-# Find columns where all rows are not zero
-non_zero_cols = Group.loc[:, (Group != 0).any(axis=0)].columns
-
-# Get the first 10 columns
-first_10_cols = non_zero_cols[:10]
-
-print(first_10_cols)
-
+# Assuming df is your DataFrame
+columns_to_keep = [1, 2, 3, 5, 6, 7, 8, 10, 11, 12]
+new_df = Group[columns_to_keep]
 
 """
 G1 = GROUP('dataset/raiting.csv', 5)

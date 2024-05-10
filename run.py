@@ -31,6 +31,38 @@ def calculate_similarity(group):
 
     return final_dataframe
 
+
+from scipy.spatial import distance
+def calculate_trust(group):
+    members = group.index
+    Group = group
+    Trust_matrix = pd.DataFrame(0.0, index=members, columns=members)
+
+    for u in members:
+        rated_list_u = group.loc[u].index[Group.loc[u] >= 0]
+        count_rated_u = len(rated_list_u)
+        ratings_u = Group.loc[u][:]
+
+        for v in members:
+            if u == v:
+                continue
+
+            rated_list_v = Group.loc[v].index[Group.loc[v] > 0]
+            ratings_v = Group.loc[v][:]
+
+            intersection_uv = set(rated_list_u).intersection(rated_list_v)
+            count_intersection = len(intersection_uv)
+
+            partnership_uv = count_intersection / count_rated_u
+
+            dst_uv = 1 / (1 + distance.euclidean(ratings_u, ratings_v))
+
+            trust_uv = (2 * partnership_uv * dst_uv) / (partnership_uv + dst_uv)
+            Trust_matrix.at[u, v] = trust_uv
+
+        return Trust_matrix
+
+
 # Create a dictionary with ten columns
 data = {
     'I1': np.array([2.5, 2, 2, 2, 2.5]),
@@ -48,8 +80,9 @@ data = {
 # Create the DataFrame
 df = pd.DataFrame(data)
 
-print(df)
-print(calculate_similarity(df))
+print("Dataframe\n", df)
+print("similarity:\n", calculate_similarity(df))
+print("trust:\n", calculate_trust(df))
 
 
 

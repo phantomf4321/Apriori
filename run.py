@@ -8,7 +8,7 @@ G1 = GROUP('dataset/raiting.csv', 5)
 Group = G1.set_matrix()
 print(Group)
 
-#Group.to_csv('dataset/my_group_on_5.csv')
+Group.to_csv('dataset/my_group_on_5.csv')
 
 # Assuming df is your DataFrame
 columns_to_keep = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]

@@ -98,13 +98,17 @@ print("Dataframe\n", df)
 print("similarity:\n", calculate_similarity(df))
 print("trust:\n", calculate_trust(df))
 
+trust = calculate_trust(df)
+similarity = calculate_similarity(df)
+df.to_csv('dataset/my_sample_dataframe.csv')
+trust.to_csv('dataset/my_sample_dataframe_trust.csv')
+similarity.to_csv('dataset/my_sample_dataframe_similarity.csv')
 
 
 
 
 
-"""
-G1 = GROUP('dataset/raiting.csv', 5)
+"""G1 = GROUP('dataset/raiting.csv', 5)
 Group = G1.set_matrix()
 Sub_group = G1.set_sub_matrix(10)
 
@@ -112,4 +116,5 @@ E1 = Engine(Group)
 E2 = Engine(Sub_group)
 
 print(E1.run(True))
+print(E2.calculate_trust())
 print(E2.calculate_similarity())"""

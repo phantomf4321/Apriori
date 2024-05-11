@@ -37,6 +37,38 @@ class Engine:
         print(self.get_group())
 
     def calculate_trust(self):
+        Group = self.get_group()
+        members = Group.index
+        no_member = len(members)
+
+        Trust_matrix = pd.DataFrame(0.0, index=members, columns=members)
+
+        for u in members:
+            rated_list_u = Group.loc[u].index[Group.loc[u] > 0]
+            count_rated_u = len(rated_list_u)
+            ratings_u = Group.loc[u][:]
+
+            for v in members:
+                if u == v:
+                    continue
+
+                rated_list_v = Group.loc[v].index[Group.loc[v] > 0]
+                count_rated_v = len(rated_list_v)
+                ratings_v = Group.loc[v][:]
+
+                intersection_uv = set(rated_list_u).intersection(rated_list_v)
+                count_intersection = len(intersection_uv)
+
+                partnership_uv = count_intersection / count_rated_u
+
+                dst_uv = 1 / (1 + distance.euclidean(ratings_u, ratings_v))
+
+                trust_uv = (2 * partnership_uv * dst_uv) / (partnership_uv + dst_uv)
+                Trust_matrix.at[u, v] = trust_uv
+
+        return Trust_matrix
+
+    def calculate_trust(self):
         members = self.group.index
         Group = self.get_group()
         Trust_matrix = pd.DataFrame(0.0, index=members, columns=members)

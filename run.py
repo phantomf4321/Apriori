@@ -90,18 +90,9 @@ data = {
     'I10': np.array([3.5, 3, 3, 3, 3.5]),
 }
 
-data2 = {
-    'I1': np.array([0, 3, 4, 3, 0]),
-    'I2': np.array([2, 2, 0, 4, 2]),
-    'I3': np.array([4, 0, 3, 0, 0]),
-    'I4': np.array([3, 4, 5, 5, 3]),
-    'I5': np.array([0, 0, 3, 2, 0]),
-    'I6': np.array([5, 4, 4, 4, 5]),
-    'I7': np.array([0, 2, 3, 0, 4]),
-}
 
 # Create the DataFrame
-df = pd.DataFrame(data2)
+df = pd.DataFrame(data)
 
 print("Dataframe\n", df)
 print("similarity:\n", calculate_similarity(df))

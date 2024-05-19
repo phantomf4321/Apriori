@@ -93,7 +93,6 @@ def calculate_centerality(group):
 
     return Cd
 
-
 # Create a dictionary with ten columns
 data = {
     'I1': np.array([2.5, 2, 2, 2, 2.5]),

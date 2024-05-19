@@ -76,6 +76,24 @@ def calculate_trust(Group):
     return Trust_matrix
 
 
+
+def calculate_centerality(group):
+    members = group.index
+    ratings = group.to_numpy()  # Convert DataFrame to a NumPy array
+    matrix = np.zeros((len(members), len(members)))
+    avg = np.average(ratings)
+
+    loop_counter = 0
+    for r in ratings:
+        matrix[loop_counter][loop_counter] = abs(avg - np.average(r))
+        loop_counter += 1
+
+    # Convert the matrix to a DataFrame with proper index and columns
+    Cd = pd.DataFrame(matrix, index=members, columns=members)
+
+    return Cd
+
+
 # Create a dictionary with ten columns
 data = {
     'I1': np.array([2.5, 2, 2, 2, 2.5]),
@@ -97,12 +115,13 @@ df = pd.DataFrame(data)
 print("Dataframe\n", df)
 print("similarity:\n", calculate_similarity(df))
 print("trust:\n", calculate_trust(df))
+print("Centrality: \n", calculate_centerality(df))
 
-trust = calculate_trust(df)
+"""trust = calculate_trust(df)
 similarity = calculate_similarity(df)
 df.to_csv('dataset/my_sample_dataframe.csv')
 trust.to_csv('dataset/my_sample_dataframe_trust.csv')
-similarity.to_csv('dataset/my_sample_dataframe_similarity.csv')
+similarity.to_csv('dataset/my_sample_dataframe_similarity.csv')"""
 
 
 

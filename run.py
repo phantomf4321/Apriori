@@ -81,11 +81,11 @@ def calculate_centerality(group):
     members = group.index
     ratings = group.to_numpy()  # Convert DataFrame to a NumPy array
     matrix = np.zeros((len(members), len(members)))
-    avg = np.average(ratings)
+    avg = np.average(ratings,  weights=(ratings != 0))
 
     loop_counter = 0
     for r in ratings:
-        matrix[loop_counter][loop_counter] = abs(avg - np.average(r))
+        matrix[loop_counter][loop_counter] = abs(avg)
         loop_counter += 1
 
     # Convert the matrix to a DataFrame with proper index and columns

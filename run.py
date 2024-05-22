@@ -15,3 +15,4 @@ def solve(a, b, c):
 
     return max(resalts)
 
+print(solve(2,10,3))

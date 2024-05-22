@@ -85,7 +85,7 @@ def calculate_centerality(group):
 
     loop_counter = 0
     for r in ratings:
-        matrix[loop_counter][loop_counter] = abs(avg)
+        matrix[loop_counter][loop_counter] = abs(avg - np.average(r, weights=(r != 0)))
         loop_counter += 1
 
     # Convert the matrix to a DataFrame with proper index and columns

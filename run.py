@@ -93,6 +93,18 @@ def calculate_centerality(group):
 
     return Cd
 
+
+def calculate_centerality_list(group):
+    resault = []
+    members = group.index
+    ratings = group.to_numpy()  # Convert DataFrame to a NumPy array
+    avg = np.average(ratings,  weights=(ratings != 0))
+
+    for r in ratings:
+        resault.append(abs(avg - np.average(r, weights=(r != 0))))
+
+    return resault
+
 # Create a dictionary with ten columns
 data = {
     'I1': np.array([2.5, 2, 2, 2, 2.5]),
@@ -115,6 +127,7 @@ print("Dataframe\n", df)
 print("similarity:\n", calculate_similarity(df))
 print("trust:\n", calculate_trust(df))
 print("Centrality: \n", calculate_centerality(df))
+print("Centerality list :", calculate_centerality_list(df))
 
 """trust = calculate_trust(df)
 similarity = calculate_similarity(df)

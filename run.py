@@ -144,6 +144,9 @@ leader = identify_leader(trust, similarity, centerality, len(df))
 
 print("Dataframe\n", df)
 
+for d in df:
+    print(d)
+
 NG = len(df)
 LIFNg = (calculate_similarity(df) + calculate_trust(df) + calculate_centerality(df))/3*(NG-1)
 print("LIFNg\n", LIFNg)

@@ -161,7 +161,7 @@ NG = len(df)
 makh = 3*(NG-1)
 LIFNg = (header)/makh
 print("makh:{} header:{}".format(makh, header))
-print("LIFNg\n", LIFNg)
+print("LIFNg\n", LIFNg/2)
 
 
 """

@@ -112,7 +112,7 @@ def identify_leader(Trust_matrix, Similarity_matrix, Centerality_matrix, total_m
     centerality_sum = np.sum(Centerality_matrix.values, axis=0) - 1
 
     ts_sumation = trust_sum + similarity_sum + centerality_sum
-    LeaderId = np.argmax(ts_sumation
+    LeaderId = np.argmax(ts_sumation)
 
     LeaderImpact = ts_sumation[LeaderId] / (total_members - 1)
 
@@ -136,7 +136,14 @@ data = {
 # Create the DataFrame
 df = pd.DataFrame(data)
 
+trust = calculate_trust(df)
+similarity = calculate_similarity(df)
+centerality = calculate_centerality(df)
+leader = identify_leader(trust, similarity, centerality, len(df))
+
+
 print("Dataframe\n", df)
+
 NG = len(df)
 LIFNg = (calculate_similarity(df) + calculate_trust(df) + calculate_centerality(df))/3*(NG-1)
 print("LIFNg\n", LIFNg)

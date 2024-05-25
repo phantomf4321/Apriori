@@ -145,7 +145,10 @@ leader = identify_leader(trust, similarity, centerality, len(df))
 print("Dataframe\n", df)
 
 for index, row in df.iterrows():
-    print(f"Row {index}: I1={row['I1']}, I2={row['I2']}")
+    if index == leader[0]:
+        print("lalalalal")
+    else:
+        print(f"Row {index}: I1={row['I1']}, I2={row['I2']}")
 
 NG = len(df)
 LIFNg = (calculate_similarity(df) + calculate_trust(df) + calculate_centerality(df))/3*(NG-1)

@@ -158,7 +158,9 @@ print("Dataframe\n", df)
         print(f"Row {index}: I1={row['I1']}, I2={row['I2']}")"""
 
 NG = len(df)
-LIFNg = (header)/3*(NG-1)
+makh = 3*(NG-1)
+LIFNg = (header)/makh
+print("makh:{} header:{}".format(makh, header))
 print("LIFNg\n", LIFNg)
 
 

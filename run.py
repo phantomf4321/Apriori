@@ -141,8 +141,16 @@ similarity = calculate_similarity(df)
 centerality = calculate_centerality(df)
 leader = identify_leader(trust, similarity, centerality, len(df))
 
+trust_sum_no_diagonal = np.sum(trust.values * (1 - np.eye(trust.shape[0])))
+similarity_sum_no_diagonal = np.sum(similarity.values * (1 - np.eye(trust.shape[0])))
+centerality_sum_no_diagonal = np.sum(centerality.values * (1 - np.eye(trust.shape[0])))
+
+header = trust_sum_no_diagonal + similarity_sum_no_diagonal + centerality_sum_no_diagonal
+
+
 
 print("Dataframe\n", df)
+print(header)
 
 for index, row in df.iterrows():
     if index == leader[0]:

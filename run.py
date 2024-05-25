@@ -105,7 +105,7 @@ def calculate_centerality_list(group):
 
     return resault
 
-def identify_leader(self, Trust_matrix, Similarity_matrix, Centerality_matrix, total_members):
+def identify_leader(Trust_matrix, Similarity_matrix, Centerality_matrix, total_members):
 
     trust_sum = np.sum(Trust_matrix.values, axis=0) - 1
     similarity_sum = np.sum(Similarity_matrix.values, axis=0) - 1

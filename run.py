@@ -127,8 +127,6 @@ print("Dataframe\n", df)
 
 print(len(df))
 
-print(header)
-
 
 """
 print("similarity:\n", calculate_similarity(df))

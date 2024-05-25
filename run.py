@@ -124,10 +124,14 @@ data = {
 df = pd.DataFrame(data)
 
 print("Dataframe\n", df)
+
+
+
+"""
 print("similarity:\n", calculate_similarity(df))
 print("trust:\n", calculate_trust(df))
 print("Centrality: \n", calculate_centerality(df))
-print("Centerality list :", calculate_centerality_list(df))
+print("Centerality list :", calculate_centerality_list(df))"""
 
 """trust = calculate_trust(df)
 similarity = calculate_similarity(df)

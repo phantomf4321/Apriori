@@ -105,6 +105,19 @@ def calculate_centerality_list(group):
 
     return resault
 
+def identify_leader(self, Trust_matrix, Similarity_matrix, Centerality_matrix, total_members):
+
+    trust_sum = np.sum(Trust_matrix.values, axis=0) - 1
+    similarity_sum = np.sum(Similarity_matrix.values, axis=0) - 1
+    centerality_sum = np.sum(Centerality_matrix.values, axis=0) - 1
+
+    ts_sumation = trust_sum + similarity_sum + centerality_sum
+    LeaderId = np.argmax(ts_sumation
+
+    LeaderImpact = ts_sumation[LeaderId] / (total_members - 1)
+
+    return Trust_matrix.index[LeaderId], LeaderImpact
+
 # Create a dictionary with ten columns
 data = {
     'I1': np.array([2.5, 2, 2, 2, 2.5]),

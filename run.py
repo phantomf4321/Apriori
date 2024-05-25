@@ -150,7 +150,6 @@ header = trust_sum_no_diagonal + similarity_sum_no_diagonal + centerality_sum_no
 
 
 print("Dataframe\n", df)
-print(header)
 
 for index, row in df.iterrows():
     if index == leader[0]:
@@ -159,7 +158,7 @@ for index, row in df.iterrows():
         print(f"Row {index}: I1={row['I1']}, I2={row['I2']}")
 
 NG = len(df)
-LIFNg = (calculate_similarity(df) + calculate_trust(df) + calculate_centerality(df))/3*(NG-1)
+LIFNg = (header)/3*(NG-1)
 print("LIFNg\n", LIFNg)
 
 

@@ -124,7 +124,9 @@ data = {
 df = pd.DataFrame(data)
 
 print("Dataframe\n", df)
+header = 3 * calculate_trust(df) * calculate_similarity(df)
 
+print(header)
 
 
 """

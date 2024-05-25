@@ -160,7 +160,6 @@ print("Dataframe\n", df)
 NG = len(df)
 makh = 6*(NG-1)
 LIFNg = (header)/makh
-print("makh:{} header:{}".format(makh, header))
 print("LIFNg\n", LIFNg)
 
 

@@ -124,8 +124,9 @@ data = {
 df = pd.DataFrame(data)
 
 print("Dataframe\n", df)
-
-print(len(df))
+NG = len(df)
+LIFNg = (calculate_similarity(df) + calculate_trust(df) + calculate_centerality(df))/3*(NG-1)
+print("LIFNg\n", LIFNg)
 
 
 """

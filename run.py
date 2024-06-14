@@ -18,7 +18,7 @@ print(new_df)"""
 import pandas as pd
 import numpy as np
 
-"""
+
 def calculate_similarity(group):
     members = group.index
     ratings = group.to_numpy()  # Convert DataFrame to a NumPy array
@@ -95,7 +95,10 @@ def calculate_centerality_list(group):
     for r in ratings:
         resault.append(abs(avg - np.average(r, weights=(r != 0))))
 
-    return resault
+    max_value = max(resault)
+    result_normalized = [value / max_value for value in resault]
+
+    return result_normalized
 
 def identify_leader(Trust_matrix, Similarity_matrix, Centerality_matrix, total_members):
 
@@ -143,16 +146,7 @@ header = trust_sum_no_diagonal + similarity_sum_no_diagonal + centerality_sum_no
 
 print("Dataframe\n", df)
 
-for index, row in df.iterrows():
-    if index == leader[0]:
-        print("lalalalal")
-    else:
-        print(f"Row {index}: I1={row['I1']}, I2={row['I2']}")
 
-NG = len(df)
-makh = 6*(NG-1)
-LIFNg = (header)/makh
-print("LIFNg\n", LIFNg)
 
 
 
@@ -160,7 +154,7 @@ print("similarity:\n", calculate_similarity(df))
 print("trust:\n", calculate_trust(df))
 print("Centrality: \n", calculate_centerality(df))
 print("Centerality list :", calculate_centerality_list(df))
-
+"""
 trust = calculate_trust(df)
 similarity = calculate_similarity(df)
 df.to_csv('dataset/my_sample_dataframe.csv')
@@ -171,8 +165,8 @@ similarity.to_csv('dataset/my_sample_dataframe_similarity.csv')"""
 
 
 
-G1 = GROUP('dataset/raiting.csv', 25)
+"""G1 = GROUP('dataset/raiting.csv', 25)
 Group = G1.set_matrix()
 
 E1 = Engine(Group)
-print(E1.run(True))
+print(E1.run(True))"""

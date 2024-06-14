@@ -18,7 +18,7 @@ print(new_df)"""
 import pandas as pd
 import numpy as np
 
-
+"""
 def calculate_similarity(group):
     members = group.index
     ratings = group.to_numpy()  # Convert DataFrame to a NumPy array
@@ -163,13 +163,13 @@ LIFNg = (header)/makh
 print("LIFNg\n", LIFNg)
 
 
-"""
+
 print("similarity:\n", calculate_similarity(df))
 print("trust:\n", calculate_trust(df))
 print("Centrality: \n", calculate_centerality(df))
-print("Centerality list :", calculate_centerality_list(df))"""
+print("Centerality list :", calculate_centerality_list(df))
 
-"""trust = calculate_trust(df)
+trust = calculate_trust(df)
 similarity = calculate_similarity(df)
 df.to_csv('dataset/my_sample_dataframe.csv')
 trust.to_csv('dataset/my_sample_dataframe_trust.csv')

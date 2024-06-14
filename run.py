@@ -36,15 +36,7 @@ from scipy.spatial import distance
 
 
 def calculate_trust(Group):
-    """
-    Calculate the trust matrix based on common rated items between group members and their ratings distance.
-
-    Parameters:
-        Group (DataFrame): A DataFrame containing group members' ratings for items.
-
-    Returns:
-        Trust_matrix (DataFrame): The trust matrix representing the trust levels between members.
-    """
+    
     members = Group.index
     no_member = len(members)
 
@@ -151,11 +143,11 @@ header = trust_sum_no_diagonal + similarity_sum_no_diagonal + centerality_sum_no
 
 print("Dataframe\n", df)
 
-"""for index, row in df.iterrows():
+for index, row in df.iterrows():
     if index == leader[0]:
         print("lalalalal")
     else:
-        print(f"Row {index}: I1={row['I1']}, I2={row['I2']}")"""
+        print(f"Row {index}: I1={row['I1']}, I2={row['I2']}")
 
 NG = len(df)
 makh = 6*(NG-1)
@@ -179,7 +171,7 @@ similarity.to_csv('dataset/my_sample_dataframe_similarity.csv')"""
 
 
 
-"""G1 = GROUP('dataset/raiting.csv', 5)
+G1 = GROUP('dataset/raiting.csv', 5)
 Group = G1.set_matrix()
 Sub_group = G1.set_sub_matrix(10)
 
@@ -188,4 +180,4 @@ E2 = Engine(Sub_group)
 
 print(E1.run(True))
 print(E2.calculate_trust())
-print(E2.calculate_similarity())"""
+print(E2.calculate_similarity())
